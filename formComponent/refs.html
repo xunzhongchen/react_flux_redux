@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>refs</title>
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="test"></div>
+<script type="text/babel">
+
+
+
+    const Comp=React.createClass({
+
+        componentDidMount(){
+            this.refs.myInput1.focus()
+        },
+
+        click(){
+            console.log(this.refs.myInput)
+            this.refs.myInput.focus()
+        },
+
+        render(){
+            return (
+                <div>
+                    <input ref="myInput"/>
+                    <input ref="myInput1"/>
+                    <input ref={function (dom) {
+                        console.log(dom)
+                        dom.focus();//界面初始化之后  就可以获得焦点
+                    }}/>
+                    <button onClick={this.click}>click me!</button>
+                </div>
+            )
+        }
+    })
+
+    ReactDOM.render(<Comp/>,document.getElementById('test'))
+
+</script>
+
+</body>
+</html>

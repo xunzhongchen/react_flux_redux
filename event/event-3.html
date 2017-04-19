@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>event-3</title>
+
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+</head>
+<body>
+
+<div id="test"></div>
+<script type="text/babel">
+
+    /*
+        自定义事件 changeNameHandle
+    */
+
+
+    const Dnd=React.createClass({
+        getInitialState(){
+            return {
+                name:''
+            }
+        },
+
+        changeHandle(ev){
+
+            this.setState({
+                name:ev.target.value
+            })
+
+            //好像 异步
+
+
+            /*var _this=this;
+
+            setTimeout(function () {
+                console.log(_this.state.name)
+            },1000)*/
+
+
+            console.log(this.state.name)
+
+            this.props.onChangeName(ev.target.value)
+
+
+
+        },
+
+        render(){
+            return (
+                <div>
+                    <input  type="text" onChange={this.changeHandle} value={this.state.name}/>
+                </div>
+            )
+        }
+    })
+
+
+
+    ReactDOM.render(<Dnd onChangeName={changeNameHandle}/>,document.getElementById('test'))
+
+    function changeNameHandle(name) {
+        //console.log(name)
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+组件生命周期          调用次数
+init   初始化          1
+    defaultProps（share） -> getDefaultProps(){retuen {group:123}} 不能够手动调用 react系统内部调用 ->React.createClass() 调用时机
+        类产生的时候 不是实例产生的时候  初始化了defaultProps 所有实例共享这个数据
+
+        值规定是简单类型
+
+        只读
+
+    state ->getInitialState(){return {}}/es6 constructor(){this.state={}}
+        实例产生的时候
+
+        内部自身可写的
+
+mount   装载           1
+
+    componentWillMount()
+        state
+    componentDidMount()
+        dom 最外层dom操作
+        other framework
+        ajax server data
+
+
+update  更新           n
+    componentWillUpdate(object nextProps, object nextState)
+    componentDidUpdate(object prevProps, object prevState)
+
+    过程复杂  不同场景 调用方法不一样 顺序/部分和全部调用
+
+    装载的过程和更新的过程是 分开的   也就是第一次 render是装载过程  第二次render 才认为是更新
+    外部渲染/内部状态的更新 /强制刷新
+
+
+unmount 卸载           1
+    componentWillUnmount()
+    不显示在界面上 等于卸载
+
+
+
+componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用

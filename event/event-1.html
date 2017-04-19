@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event-1</title>
+
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+</head>
+<body>
+
+<div id="test"></div>
+<script type="text/babel">
+
+    /*
+     onKeyUp
+     onKeyDown
+    */
+    const Comp=React.createClass({
+        getInitialState(){
+            return {
+                top:0,
+                left:0
+            }
+        },
+
+
+        keyup(ev){
+
+
+            switch (ev.keyCode){
+                case 37:
+                        this.setState({
+                            left:this.state.left-5
+                        })
+                    break;
+                case 38:
+                    this.setState({
+                        top:this.state.top-5
+                    })
+
+                    break;
+                case 39:
+                    this.setState({
+                        left:this.state.left+5
+                    })
+
+                    break;
+                case 40:
+                    this.setState({
+                        top:this.state.top+5
+                    })
+                    break;
+            }
+
+        },
+
+        render(){
+            return (
+                <div
+                        style={{width:"450px",height:"450px",background:'yellow',position:'relative'}}
+                        tabIndex={1}
+                        onKeyDown={this.keyup}
+                        ref={dom=>{if(dom)dom.focus()}}
+                >
+
+                    <div
+                            style={
+                                {width:"45px", height:"45px", background:'red',position:'absolute',
+                                    top:this.state.top+'px', left:this.state.left+'px'}}
+                    ></div>
+                </div>
+            )
+        }
+    })
+
+    ReactDOM.render(<Comp/>,document.getElementById('test'))
+
+</script>
+
+</body>
+</html>

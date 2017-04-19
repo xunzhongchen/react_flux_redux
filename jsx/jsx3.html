@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="build/react.js"></script>-->
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+
+    <!--<script src="build/react-dom.js"></script>-->
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+
+    <!--<script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>-->
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+
+
+
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel" >
+
+    //Item
+    const Item=React.createClass({
+        render(){
+            return (
+                    <li>one one ! item</li>
+            )
+        }
+    })
+
+
+    /*ReactDOM.render(
+        <ul style="background-color:red">//这种写法 不符合jsx语法
+            <Item/>
+            <Item/>
+        </ul>,
+        document.getElementById('container')
+    );*/
+
+
+    ReactDOM.render(
+            <ul style={{backgroundColor:'#ccc',color:'green'}}>
+                <Item/>
+                <Item/>
+            </ul>,
+        document.getElementById('container')
+    );
+
+
+
+
+    /*ReactDOM.render(
+        React.createElement('ul',
+            {style: {backgroundColor:'green',color:'#ccc'}}
+            ,[React.createElement(Item),
+            React.createElement(Item),
+            React.createElement(Item)]
+        ),
+        document.getElementById('container')
+    );*/
+
+
+
+</script>
+
+
+
+</body>
+
+
+
+</html>

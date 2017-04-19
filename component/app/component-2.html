@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+</head>
+<body>
+<div id="test"></div>
+
+<script type="text/babel">
+
+
+
+    class Item  extends React.Component{
+        constructor(props){//构造函数
+            super(props)
+
+            //getInitalState
+            this.state={
+                result:123
+            }
+        }
+
+        //getDefaultProps
+        static get defaultProps(){//静态方法
+            return {
+                group:'javascript'
+            }
+        }
+
+        // mixins:[exf]  es不支持混合
+
+        test(){
+            console.log('ok test mixins',this.props.group)
+        }
+
+
+        render(){
+            return (
+                    <div>
+                        <button onClick={this.test.bind(this)}>click me!</button>{/*无法自动绑定  借助bind方法 进行固化*/}
+                        hello word;{this.props.group}{this.state.result}
+                    </div>
+            )
+        }
+
+    }
+
+    /*Item.defaultProps={
+
+        group:'js'
+    }*/
+
+
+    //内部自动设置 displayName='Item'
+    ReactDOM.render(<div><Item /> <Item group="nodejs"/> </div>,document.getElementById('test'))
+</script>
+
+</body>
+</html>

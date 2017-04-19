@@ -1,0 +1,34 @@
+{
+  "name": "redex_pro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react-redux-1": "browserify react-redux/react-redux-1.js > react-redux/build/build-1.js -t [ babelify --presets [es2015 react] ]",
+    "react-redux-2": "browserify react-redux/react-redux-2.js -o react-redux/build/build-2.js -t [ babelify --presets [react es2015] ]",
+    "react-redux-3": "browserify react-redux/react-redux-3.js -o react-redux/build/build-3.js -t [ babelify --presets [react es2015] ]",
+    "react-redux-4": "browserify react-redux/react-redux-4.js -o react-redux/build/build-4.js -t [ babelify --presets [react es2015] ]",
+    "react-redux-5": "browserify react-redux/react-redux-5.js -o react-redux/build/build-5.js -t [ babelify --presets [react es2015] ]",
+    "react-redux-6": "browserify react-redux/react-redux-6.js -o react-redux/build/build-6.js -t [ babelify --presets [react es2015] ]"
+
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.1.0",
+    "flux-standard-action": "^1.2.0"
+  },
+  "dependencies": {
+    "babel-cli": "^6.24.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0"
+  }
+}

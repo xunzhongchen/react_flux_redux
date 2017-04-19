@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="build/react.js"></script>-->
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+
+    <!--<script src="build/react-dom.js"></script>-->
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+
+
+    <!--<script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>-->
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="./css.css"/>
+</head>
+<body>
+
+    <div id="container" class="container"></div>
+    <script type="text/babel" >
+
+        //Item
+        const Item=React.createClass({
+
+            getInitialState(){
+                return{
+                    isEditor:true
+                }
+            },
+
+            editor(){
+                this.setState({
+                    isEditor:true
+                })
+            },
+
+
+            remove(){
+                this.props.onRemove(this.props.id)
+            },
+
+
+            save(){
+
+                this.props.onSave(this.props.id,this.refs.inputText.value)
+
+                this.setState({
+                    isEditor:false
+                })
+            },
+
+            render(){
+
+
+                return this.state.isEditor?
+
+                (<li className="list-group-item">
+                    {this.props.id}
+                    <input class="item-edit" defaultValue={this.props.value} ref="inputText"/>
+                    <a className="glyphicon glyphicon-share" href="#" onClick={this.save}></a>
+                    <a href="#" className=" glyphicon glyphicon-remove" onClick={this.remove}></a>
+                </li>)
+
+                :
+                (<li className="list-group-item">
+                    {this.props.value}
+                    <a className="right glyphicon glyphicon-edit" href="#" onClick={this.editor}></a>
+                    <a href="#" className="right glyphicon glyphicon-remove" onClick={this.remove}></a>
+                </li>)
+            }
+        })
+
+        //List
+        const List=React.createClass({
+            getInitialState(){
+                return {
+                    key:0,
+                    list:new Map(),
+                }
+            },
+
+            add(){
+                const key=++this.state.key;
+                this.state.list.set(key,{value:''})
+
+                this.forceUpdate()
+            },
+
+            removeItem(id){
+                this.state.list.delete(id);
+                this.forceUpdate();
+            },
+
+
+            save(id,value){
+                const key=id;
+                this.state.list.set(key,{value:value})
+                this.forceUpdate();
+            },
+
+
+            render(){
+                const listDOM=[];
+                for(let entity of this.state.list){
+                    listDOM.push(
+                        <Item
+                                key={entity[0]}
+                                id={entity[0]}
+                                value={entity[1].value}
+                                onRemove={this.removeItem}
+                                onSave={this.save}
+
+                        />)
+                }
+
+
+                return (
+                        <div>
+                            <button className="btn btn-default" onClick={this.add}>Add</button>
+                            <ul className="list-group">
+                                {listDOM}
+                            </ul>
+                        </div>
+                )
+            }
+        })
+
+
+        ReactDOM.render(
+                <List />,
+            document.getElementById('container')
+        );
+    </script>
+
+
+
+</body>
+
+
+
+</html>

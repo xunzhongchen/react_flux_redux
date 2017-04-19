@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>demo1</title>
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+
+
+     const list=[];
+     const database={
+         add(article){
+            list.push(article);
+            return list.length-1;
+
+         },
+         del(index){//不破坏长度信息
+            list[index]=null;
+
+         },
+         update(index,newArticle){
+             list.splice(index,1,newArticle)
+
+         },
+         get list(){
+             return list;
+         }
+     }
+
+
+
+    const Item=React.createClass({
+        displayName:'Item',
+        getDefaultProps(){
+            console.log('get default props')
+
+            return {
+                value:'no value'
+            }
+        },
+        getInitialState(){
+            console.log('get initial state')
+            return {
+                value  :this.props.value,
+                history:[this.props.value],
+                currentHistoryIndex:0
+
+            }
+        },
+
+
+        componentWillMount(){
+            console.log('component will mount')
+
+            this.state.dbkey=database.add({value:this.state.value})
+
+        },
+
+        componentDidMount(){//加载完毕 浏览器显示的dom 可以得到   dom刚生成
+            console.log('component did mount')
+            const domItem=ReactDOM.findDOMNode(this);
+
+            let isYellow=false;
+            this.state.loopNum=setInterval(function () {
+
+                if(isYellow){
+                    domItem.style.backgroundColor='red';
+                    isYellow=false;
+
+                }else {
+                    domItem.style.backgroundColor='yellow';
+                    isYellow=true;
+                }
+
+            },10000)
+        },
+
+
+        componentWillReceiveProps(nextProps){
+            console.log('component will ReceiveProps','nextProps',nextProps)
+            this.state.value=nextProps.value;
+        },
+
+        shouldComponentUpdate(nextProps, nextState){//组件判断是否重新渲染时调用
+            console.log('should Component Update','nextProps=',nextProps,'nextState=',nextState)
+
+            return true;
+
+        },
+
+        componentWillUpdate(nextProps,nextState){
+            console.log('component will update','nextProps=',nextProps,'nextState=',nextState)
+            //update database
+
+            let dbkey=this.state.dbkey;
+
+            database.update(dbkey,{value:this.state.value})
+
+        },
+
+
+        componentDidUpdate(prevProps,prevState){
+            console.log('component did update','prevProps=',prevProps,'prevState=',prevState)
+
+            let dom=ReactDOM.findDOMNode(this);
+
+            let oldStyle=dom.style.border;
+
+            dom.style.border='1px solid green';
+
+
+            setTimeout(function () {
+                dom.style.border=oldStyle;
+            },2000)
+        },
+
+
+        componentWillUnmount(){
+            console.log('component will unmount')
+
+            clearInterval(this.state.loopNum)
+        },
+
+        changeValue(ev){
+            this.setState({value:ev.target.value})
+        },
+
+        save(){
+            /*
+                this.state.history.push(this.state.value)
+                this.state.currentHisotry=this.state.value;
+            */
+
+            const value=this.state.value;
+            const history=this.state.history;
+
+            const currentHistoryIndex=history.length;
+
+            history.push(value);
+
+
+            this.setState({
+                history,
+                currentHistoryIndex
+            })
+        },
+
+        prev(){
+            let currentHistoryIndex=this.state.currentHistoryIndex;
+
+            if(currentHistoryIndex!==0){
+                currentHistoryIndex-=1;
+
+                this.setState({
+                    currentHistoryIndex
+                })
+            }
+
+
+        },
+
+        next(){
+            let currentHistoryIndex=this.state.currentHistoryIndex;
+
+            if(currentHistoryIndex!==this.state.history.length-1){
+                currentHistoryIndex+=1;
+
+                this.setState({
+                    currentHistoryIndex
+                })
+            }
+
+        },
+
+
+        render(){
+            console.log('render')
+            return (
+                <div>
+                    <div>
+                        <button onClick={this.prev}>prev</button>
+                        <span>{this.state.history[this.state.currentHistoryIndex]}</span>
+                        <button onClick={this.next}>next</button>
+                    </div>
+
+                    <input value={this.state.value} onChange={this.changeValue}/>
+                    <button onClick={this.save}>save</button>
+                </div>
+            )
+        }
+    })
+
+
+    ReactDOM.render(
+            <div>
+                <Item value='xun'/>
+                <Item value='cai'/>
+            </div>
+        ,document.getElementById('test')
+    )
+
+
+
+</script>
+
+</body>
+</html>

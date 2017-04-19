@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>mvvm-1</title>
+
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+
+
+</head>
+<body>
+
+<div id="test"></div>
+<script type="text/babel">
+
+
+
+
+
+
+    const Comp=React.createClass({
+        displayName:'Comp',
+
+        getInitialState(){
+            return {
+                name:''
+            }
+        },
+
+
+
+        changeName(ev){
+            this.setState({
+                name:ev.target.value
+            })
+        },
+
+        render() {
+
+
+
+            return (
+                    <div>
+                       <p> {this.state.name}</p>
+                        <input type="text" value={this.state.name} onChange={this.changeName}/>
+                    </div>
+            );
+        }
+    })
+
+    ReactDOM.render(<Comp />,document.getElementById('test'));
+
+</script>
+
+</body>
+</html>

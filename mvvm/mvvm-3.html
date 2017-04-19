@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>mvvm-2</title>
+
+    <script src="//cdn.bootcss.com/react/0.14.7/react-with-addons.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+</head>
+<body>
+
+<div id="test"></div>
+<script type="text/babel">
+
+    const LinkedStateMixin=React.addons.LinkedStateMixin;
+
+    const Comp=React.createClass({
+        displayName:'Comp',
+
+        getInitialState(){
+            return {
+                name:'',
+                name1:'',
+                name2:''
+            }
+        },
+        mixins:[LinkedStateMixin],
+
+        render() {
+            return (
+                    <div>
+                        <div>
+                            <p>{this.state.name}</p>
+                            <input type="text" valueLink={this.linkState('name')} />
+                        </div>
+                        <div>
+                            <p>{this.state.name1}</p>
+                            <input type="text" valueLink={this.linkState('name1')} />
+                        </div>
+                        <div>
+                            <p>{this.state.name2}</p>
+                            <input type="text" valueLink={this.linkState('name2')} />
+                        </div>
+
+                    </div>
+            );
+        }
+    })
+
+    ReactDOM.render(<Comp />,document.getElementById('test'));
+
+</script>
+
+</body>
+</html>

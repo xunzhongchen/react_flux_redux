@@ -1,0 +1,91 @@
+React.Component
+
+
+React.createClass
+React.createElement
+
+
+
+React.js
+    var React={}
+    assign(React,ReactIsomorphic);
+
+
+ReactIsomorphic.js
+var ReactIsomorphic={
+    createElement:createElement,
+    createClass:ReactClass.createClass
+}
+
+
+ReactClass.js
+var ReactClass={
+    createClass=function(){
+
+        var Constructor=function(props,content,updater){};
+
+        Constructor.prototype=new ReactClassComponent();
+
+    }
+}
+
+var ReactClassComponent=function(){};//基础类
+assign(ReactClassComponent.prototype,ReactComponent.prototype,ReactClassMixin)
+
+
+
+ReactComponent.js
+function ReactComponent(props,content,updater){
+
+}
+ReactComponent.prototype.setState=function(){}
+ReactComponent.prototype.forceUpdate=function(){}
+
+
+ReactElement.js//描述信息 只读的
+
+
+html Element  DOM
+
+Element 描述
+
+<div>
+    <span></span>
+</div>
+
+DOM javascript object
+
+React Element Component
+
+
+
+
+Element
+    结构关系描述
+    描述输出结果
+
+
+Component
+    逻辑
+    真正的组件
+
+
+组件的输入 props/state  输出是 Element
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

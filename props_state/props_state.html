@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>props_state</title>
+
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+</head>
+<body>
+
+<div id="test"></div>
+<script type="text/babel">
+
+    /*
+
+        1.尽量使用 props  组件无状态
+            好处：类似html
+
+
+        2.组件自身状态  最小化state
+
+        3.props 与 state 相配合  计算过程 放在render中
+            state.size=props.data.lenght  不推荐
+
+            直接使用 props.data.lenght
+            render(){
+                props.data.lenght
+            }
+
+            state.len=12;
+            props.size=5;
+
+            var result=state.len*props.size
+
+            state.result=state.len*props.size 不推荐
+
+            render(){
+                var result=state.len*props.size
+            }
+
+
+    */
+
+
+
+
+    const Comp=React.createClass({
+        getInitialState(){
+            return {
+
+            }
+        },
+
+        componentWillMount(){
+
+        },
+
+        render(){
+            return (
+                <div>
+
+                </div>
+            )
+        }
+    })
+
+
+
+
+
+
+    ReactDOM.render(
+        <div>
+
+        </div>
+
+        ,document.getElementById('test'))
+
+
+
+
+
+</script>
+
+</body>
+</html>

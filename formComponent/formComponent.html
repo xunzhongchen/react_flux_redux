@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>formComponent-1</title>
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+</head>
+<body>
+
+
+<script type="text/babel">
+
+    const From=React.createClass({
+
+        getInitialState(){
+            return {
+                inputValue:'leo',
+                checkboxValue:false,
+                radioValue:false,
+                textareaValue:''
+            }
+        },
+
+        changeHandle(ev){
+            this.setState({
+                inputValue:ev.target.value
+            })
+        },
+
+        changeCheckbox(){
+            this.setState({
+                checkboxValue:!this.state.checkboxValue
+            })
+        },
+
+        changeRadio(){
+            this.setState({
+                radioValue:!this.state.radioValue
+            })
+        },
+
+
+        changeTextarea(ev){
+
+            /*this.state.textareaValue=ev.target.value*/
+
+            this.setState({
+                textareaValue:ev.target.value
+            })
+
+
+        },
+
+        render(){
+            return (
+                <form>
+                    <p>{this.state.inputValue}</p>
+                    <input type="text" value={this.state.inputValue} onChange={this.changeHandle}/>
+                    {/* 属性为：value 外部受限制的不可更改  内部可以更改 */}
+
+
+                    <input type="checkbox" checked={this.state.checkboxValue} onChange={this.changeCheckbox}/>
+                    <input type="radio" checked={this.state.radioValue} onChange={this.changeRadio}/>
+                    {/* checked defaultChecked */}
+
+                    <select value="B">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+
+                    <select multiple value={['B','C']}>
+                        {/* 多选值 必须是数组*/}
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+
+                    <textarea defaultValue="leo" ></textarea>
+                    {/*defaultValue  和value无法共用  否则 defaultValue无意义   react统一用value textarea里面不能写值 */}
+
+
+                    <div><textarea value={this.state.textareaValue} onChange={this.changeTextarea}></textarea></div>
+                </form>
+            )
+        }
+    })
+
+    ReactDOM.render(<From/>,document.body)
+
+
+    setTimeout(function () {
+        ReactDOM.render(<From/>,document.body)
+    },5000)
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "reac_route",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browserify route/lib/App.js -o route/build/build.js -t [ babelify --presets [es2015 react] ]",
+    "start-1": "browserify route-1/lib/App.js -o route-1/build/build.js -t [ babelify --presets [es2015 react] ]",
+    "start-2": "browserify route-2/lib/App.js -o route-2/build/build.js -t [ babelify --presets [es2015 react] ]",
+    "start-3": "browserify route-3/lib/App.js -o route-3/build/build.js -t [ babelify --presets [es2015 react] ]",
+    "start-4": "browserify route-4/lib/App.js -o route-4/build/build.js -t [ babelify --presets [es2015 react] ]",
+    "start-5": "browserify route-5/lib/App.js -o route-5/build/build.js -t [ babelify --presets [es2015 react] ]"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.0.0"
+  }
+}

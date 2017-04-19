@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>message-4</title>
+    <script src="./node_modules/eventemitter/index.js"></script>
+
+
+
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+</head>
+<body>
+
+<div id="test"></div>
+<script type="text/babel">
+
+    /*
+        事件总线
+    */
+
+
+
+    const eventBus=new EventEmitter();
+
+
+
+
+
+    const Comp=React.createClass({
+
+
+
+        getInitialState(){
+            return {
+                colors:['yellow','red'],
+                colorIndex:0
+            }
+        },
+
+        componentWillMount(){
+
+
+
+            eventBus.on('changeColor',(id,color) =>{
+                console.log(1)
+                if(this.props.id!==id && this.state.colors[this.state.colorIndex]===color){
+                    this.changeColor()
+                    console.log(2)//这里面不执行
+
+                }
+            })
+        },
+
+        changeColor(){
+            this.setState({
+                colorIndex:this.state.colorIndex?0:1
+            })
+
+            eventBus.emit("changeColor",this.props.id,this.state.colors[this.state.colorIndex])
+
+
+        },
+
+
+        render(){
+            console.log('render')
+            return (
+                <div style={{backgroundColor:this.state.colors[this.state.colorIndex]}}>
+                    <p>{this.props.name}</p>
+                    <button onClick={this.changeColor}>click me</button>
+                </div>
+            )
+        }
+    })
+
+
+
+
+
+
+    ReactDOM.render(
+        <div>
+            <Comp name="comp one" id="one"/>
+
+        </div>
+
+        ,document.getElementById('test'))
+
+
+
+
+
+</script>
+
+</body>
+</html>

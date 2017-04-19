@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="build/react.js"></script>-->
+    <script src="//cdn.bootcss.com/react/0.14.7/react.min.js"></script>
+
+    <!--<script src="build/react-dom.js"></script>-->
+    <script src="//cdn.bootcss.com/react/0.14.7/react-dom.min.js"></script>
+
+    <!--<script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>-->
+    <script src="//cdn.bootcss.com/babel-core/5.8.24/browser.min.js"></script>
+
+
+
+
+</head>
+<body>
+<div id="container"></div>
+<script type="text/babel" >
+
+    //Item
+    const Item=React.createClass({
+        render(){
+            return (
+                    <li>one one ! item</li>
+            )
+        }
+    })
+
+
+    let bool=false;
+    const result=[]
+
+    if(bool){
+        result.push(<Item/>);
+        result.push(<Item/>);
+        result.push(<Item/>);
+    }else {
+        result.push(<h1>h1</h1>);
+        result.push(<h1>h1</h1>);
+        result.push(<h1>h1</h1>);
+    }
+
+
+
+    ReactDOM.render(
+            <ul style={{backgroundColor:'red'}} abc='123'>
+                { result}
+                <Item/>
+            </ul>,
+        document.getElementById('container')
+    );
+    //并不支持 if else 复杂的运算方式
+
+
+
+  /*  if(bool){
+        result.push(React.createElement(Item));
+        result.push(React.createElement(Item));
+
+    }else {
+        result.push(React.createElement('h1',null,'my name is h1'));
+        result.push(React.createElement('h1',null,'my name is h1'));
+
+    }
+
+    ReactDOM.render(
+        React.createElement('ul',
+            {style: {backgroundColor:'green'},abc:'123'} ,//props
+            [result, React.createElement(Item)]
+        ),
+        document.getElementById('container')
+    );*/
+
+
+
+</script>
+
+</body>
+
+
+
+</html>
